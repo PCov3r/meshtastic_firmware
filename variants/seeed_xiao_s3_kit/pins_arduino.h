@@ -16,6 +16,6 @@ static const uint8_t SCL = 48;
 static const uint8_t MISO = 8;
 static const uint8_t SCK = 7;
 static const uint8_t MOSI = 9;
-static const uint8_t SS = 5; // was 41
+static const uint8_t SS = 41;
 
 #endif /* Pins_Arduino_h */
