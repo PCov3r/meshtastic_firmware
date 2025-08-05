@@ -1,21 +1,21 @@
 #include "configuration.h"
 
-#if !MESHTASTIC_EXCLUDE_ENVIRONMENTAL_SENSOR && __has_include(<TinyRain.h>)
+#if !MESHTASTIC_EXCLUDE_ENVIRONMENTAL_SENSOR && __has_include(<TinySensor.h>)
 
 #include "../mesh/generated/meshtastic/telemetry.pb.h"
 #include "TelemetrySensor.h"
-#include <TinyRain.h>
+#include <TinySensor.h>
 
-class TinyRainSensor : public TelemetrySensor
+class MyTinySensor : public TelemetrySensor
 {
   private:
-    TinyRain rainSensor;
+    TinySensor tinySensor;
 
   protected:
     virtual void setup() override;
 
   public:
-    TinyRainSensor();
+    MyTinySensor();
     virtual int32_t runOnce() override;
     virtual bool getMetrics(meshtastic_Telemetry *measurement) override;
 };

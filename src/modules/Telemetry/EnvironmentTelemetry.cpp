@@ -164,11 +164,11 @@ DFRobotGravitySensor dfRobotGravitySensor;
 NullSensor dfRobotGravitySensor;
 #endif
 
-#if __has_include(<TinyRain.h>)
-#include "Sensor/AttinyRainSensor.h"
-TinyRainSensor tinyRainSensor;
+#if __has_include(<TinySensor.h>)
+#include "Sensor/MyTinySensor.h"
+MyTinySensor myTinySensor;
 #else
-NullSensor tinyRainSensor;
+NullSensor myTinySensor;
 #endif
 
 #if __has_include(<SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h>)
@@ -253,8 +253,8 @@ int32_t EnvironmentTelemetryModule::runOnce()
                 result = dfRobotLarkSensor.runOnce();
             if (dfRobotGravitySensor.hasSensor())
                 result = dfRobotGravitySensor.runOnce();
-            if (tinyRainSensor.hasSensor())
-                result = tinyRainSensor.runOnce();
+            if (myTinySensor.hasSensor())
+                result = myTinySensor.runOnce();
             if (bmp085Sensor.hasSensor())
                 result = bmp085Sensor.runOnce();
 #if __has_include(<Adafruit_BME280.h>)
@@ -565,8 +565,8 @@ bool EnvironmentTelemetryModule::getEnvironmentTelemetry(meshtastic_Telemetry *m
         valid = valid && dfRobotGravitySensor.getMetrics(m);
         hasSensor = true;
     }
-    if (tinyRainSensor.hasSensor()) {
-        valid = valid && tinyRainSensor.getMetrics(m);
+    if (myTinySensor.hasSensor()) {
+        valid = valid && myTinySensor.getMetrics(m);
         hasSensor = true;
     }
     if (sht31Sensor.hasSensor()) {
@@ -812,8 +812,8 @@ AdminMessageHandleResult EnvironmentTelemetryModule::handleAdminMessageForModule
         if (result != AdminMessageHandleResult::NOT_HANDLED)
             return result;
     }
-    if (tinyRainSensor.hasSensor()) {
-        result = tinyRainSensor.handleAdminMessage(mp, request, response);
+    if (myTinySensor.hasSensor()) {
+        result = myTinySensor.handleAdminMessage(mp, request, response);
         if (result != AdminMessageHandleResult::NOT_HANDLED)
             return result;
     }
