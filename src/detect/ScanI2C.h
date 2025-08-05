@@ -69,6 +69,7 @@ class ScanI2C
         INA226,
         NXP_SE050,
         DFROBOT_RAIN,
+        DFROBOT_LUX,
         DPS310,
         LTR390UV,
         RAK12035,

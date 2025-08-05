@@ -164,6 +164,13 @@ DFRobotGravitySensor dfRobotGravitySensor;
 NullSensor dfRobotGravitySensor;
 #endif
 
+#if __has_include(<hp_BH1750.h>)
+#include "Sensor/DFRobotLuxSensor.h"
+DFRobotLuxSensor dfRobotLuxSensor;
+#else
+NullSensor dfRobotLuxSensor;
+#endif
+
 #if __has_include(<TinySensor.h>)
 #include "Sensor/MyTinySensor.h"
 MyTinySensor myTinySensor;
@@ -253,6 +260,8 @@ int32_t EnvironmentTelemetryModule::runOnce()
                 result = dfRobotLarkSensor.runOnce();
             if (dfRobotGravitySensor.hasSensor())
                 result = dfRobotGravitySensor.runOnce();
+            if (dfRobotLuxSensor.hasSensor())
+                result = dfRobotLuxSensor.runOnce();
             if (myTinySensor.hasSensor())
                 result = myTinySensor.runOnce();
             if (bmp085Sensor.hasSensor())
@@ -565,6 +574,10 @@ bool EnvironmentTelemetryModule::getEnvironmentTelemetry(meshtastic_Telemetry *m
         valid = valid && dfRobotGravitySensor.getMetrics(m);
         hasSensor = true;
     }
+    if (dfRobotLuxSensor.hasSensor()) {
+        valid = valid && dfRobotLuxSensor.getMetrics(m);
+        hasSensor = true;
+    }
     if (myTinySensor.hasSensor()) {
         valid = valid && myTinySensor.getMetrics(m);
         hasSensor = true;
@@ -809,6 +822,11 @@ AdminMessageHandleResult EnvironmentTelemetryModule::handleAdminMessageForModule
     }
     if (dfRobotGravitySensor.hasSensor()) {
         result = dfRobotGravitySensor.handleAdminMessage(mp, request, response);
+        if (result != AdminMessageHandleResult::NOT_HANDLED)
+            return result;
+    }
+    if (dfRobotLuxSensor.hasSensor()) {
+        result = dfRobotLuxSensor.handleAdminMessage(mp, request, response);
         if (result != AdminMessageHandleResult::NOT_HANDLED)
             return result;
     }
