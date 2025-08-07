@@ -16,7 +16,7 @@ int32_t MyTinySensor::runOnce()
     if (!hasSensor()) {
         return DEFAULT_SENSOR_MINIMUM_WAIT_TIME_BETWEEN_READS;
     }
-    status = tinySensor.begin();
+    status = tinySensor.begin(nodeTelemetrySensorsMap[sensorType].first);
 
     return initI2CSensor();
 }

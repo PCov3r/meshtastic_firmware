@@ -761,8 +761,11 @@ bool EnvironmentTelemetryModule::sendTelemetry(NodeNum dest, bool phoneOnly)
         LOG_INFO("Send: voltage=%f, IAQ=%d, distance=%f, lux=%f", m.variant.environment_metrics.voltage,
                  m.variant.environment_metrics.iaq, m.variant.environment_metrics.distance, m.variant.environment_metrics.lux);
 
-        LOG_INFO("Send: wind speed=%fm/s, direction=%d degrees, weight=%fkg", m.variant.environment_metrics.wind_speed,
-                 m.variant.environment_metrics.wind_direction, m.variant.environment_metrics.weight);
+        LOG_INFO("Send: wind speed=%fm/s, direction=%d degrees, wind gust=%fm/s", m.variant.environment_metrics.wind_speed,
+                 m.variant.environment_metrics.wind_direction, m.variant.environment_metrics.wind_gust);
+
+        LOG_INFO("Send: rainfall 1h=%fmm, rainfall 24h=%fmm, weight=%fkg", m.variant.environment_metrics.rainfall_1h,
+                 m.variant.environment_metrics.rainfall_24h, m.variant.environment_metrics.weight);
 
         LOG_INFO("Send: radiation=%fµR/h", m.variant.environment_metrics.radiation);
 
