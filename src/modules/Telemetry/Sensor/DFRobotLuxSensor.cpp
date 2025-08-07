@@ -8,7 +8,7 @@
 #include <hp_BH1750.h>
 #include <string>
 
-DFRobotLuxSensor::DFRobotLuxSensor() : TelemetrySensor(meshtastic_TelemetrySensorType_CUSTOM_SENSOR, "DFROBOT_LUX") {}
+DFRobotLuxSensor::DFRobotLuxSensor() : TelemetrySensor(meshtastic_TelemetrySensorType_DFROBOT_LUX, "DFROBOT_LUX") {}
 
 int32_t DFRobotLuxSensor::runOnce()
 {
@@ -16,7 +16,7 @@ int32_t DFRobotLuxSensor::runOnce()
     if (!hasSensor()) {
         return DEFAULT_SENSOR_MINIMUM_WAIT_TIME_BETWEEN_READS;
     }
-    status = BH1750.begin(BH1750_TO_GROUND);
+    status = BH1750.begin(nodeTelemetrySensorsMap[sensorType].first);
 
     BH1750.calibrateTiming();
 
