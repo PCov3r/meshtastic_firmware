@@ -26,12 +26,14 @@ extern NRF52Bluetooth *nrf52Bluetooth;
 #if ARCH_PORTDUINO
 extern HardwareSPI *DisplaySPI;
 extern HardwareSPI *LoraSPI;
-
 #endif
+
 extern ScanI2C::DeviceAddress screen_found;
 extern ScanI2C::DeviceAddress cardkb_found;
 extern uint8_t kb_model;
 extern bool kb_found;
+extern bool osk_found;
+extern unsigned long last_listen;
 extern ScanI2C::DeviceAddress rtc_found;
 extern ScanI2C::DeviceAddress accelerometer_found;
 extern ScanI2C::FoundDevice rgb_found;
@@ -41,9 +43,14 @@ extern bool eink_found;
 extern bool pmu_found;
 extern bool isUSBPowered;
 
-#ifdef T_WATCH_S3
+#ifdef HAS_DRV2605
 #include <Adafruit_DRV2605.h>
 extern Adafruit_DRV2605 drv;
+#endif
+
+#ifdef HAS_PCA9557
+#include <PCA9557.h>
+extern PCA9557 io;
 #endif
 
 #ifdef HAS_I2S
@@ -75,6 +82,7 @@ extern uint32_t timeLastPowered;
 
 extern uint32_t rebootAtMsec;
 extern uint32_t shutdownAtMsec;
+extern bool suppressRebootBanner;
 
 extern uint32_t serialSinceMsec;
 
